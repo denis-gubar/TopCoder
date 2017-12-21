@@ -1,0 +1,74 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><i>*** You may only submit a given problem once - no resubmissions will be accepted. ***</i><br></br><br></br>
+A common image editing task is to scale an image.  For example, given an image 1024 pixels wide, and 768 pixels high, you might want to reduce it to 400x300 so it takes up less disk space.  In this problem, you will be given an image as a string[], where each element represents a row of pixels, and each character represents a single pixel (the colors are simply ASCII values between 32 and 126, inclusive).  Your task is to scale the image so that it is <b>x</b> pixels wide, and <b>y</b> pixels high.  To determine the colors of the new pixels, you should draw a grid over the image such that there are <b>x</b> columns and <b>y</b> rows.  Each region of the grid will then represent a single pixel, whose color is the weighted average of all the colors within it (0.5 rounds up).  The weight of each color is equal to the area it covers in the region.  For example, consider the input {&quot;AB&quot;,&quot;BC&quot;}, with <b>x</b> = <b>y</b> = 3.  Here is a zoomed in view of the scaled image (with grid):
+<pre>
+   AA | AB | BB
+   AA | AB | BB
+  ----+----+----
+   AA | AB | BB
+   BB | BC | CC
+  ----+----+----
+   BB | BC | CC
+   BB | BC | CC
+</pre>
+Now, taking the average value of each pixel in the scaled image, we end up with:
+<pre>
+   ABB
+   BBC
+   BCC
+</pre></td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>Scale</td></tr><tr><td>Method:</td><td>scale</td></tr><tr><td>Parameters:</td><td>int, int, string[]</td></tr><tr><td>Returns:</td><td>string[]</td></tr><tr><td>Method signature:</td><td>string[] scale(int x, int y, string[] image)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td>&#160;&#160;&#160;&#160;</td></tr><tr><td></td></tr><tr><td colspan="2"><h3>Notes</h3></td></tr><tr><td align="center" valign="top">-</td><td>Each character represents a color, as given by its ASCII value.  The average of colors is just the average of the ASCII values.</td></tr><tr><td align="center" valign="top">-</td><td>Note that grid lines may go through the pixels in the original image.</td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>x</b> and <b>y</b> will be between 1 and 100, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>x</b> * <b>y</b> will be less than or equal to 8000.</td></tr><tr><td align="center" valign="top">-</td><td><b>image</b> will contain between 1 and 50 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>image</b> will contain between 1 and 50 characters, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>image</b> will contain the same number of characters.</td></tr><tr><td align="center" valign="top">-</td><td>Each character in <b>image</b> will have ASCII value between 32 and 126, inclusive.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>3</pre></td></tr><tr><td><pre>3</pre></td></tr><tr><td><pre>{&quot;AB&quot;,&quot;BC&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: { &quot;ABB&quot;,  &quot;BBC&quot;,  &quot;BCC&quot; }</pre></td></tr><tr><td><table><tr><td colspan="2">The example from the problem statement.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>2</pre></td></tr><tr><td><pre>4</pre></td></tr><tr><td><pre>{&quot;AB&quot;,&quot;BC&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: { &quot;AB&quot;,  &quot;AB&quot;,  &quot;BC&quot;,  &quot;BC&quot; }</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>51</pre></td></tr><tr><td><pre>43</pre></td></tr><tr><td><pre>{&quot;......&quot;,
+ &quot;.X....&quot;,
+ &quot;.X....&quot;,
+ &quot;.X....&quot;,
+ &quot;.X....&quot;,
+ &quot;.XXXX.&quot;,
+ &quot;......&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 
+{ &quot;...................................................&quot;,
+  &quot;...................................................&quot;,
+  &quot;...................................................&quot;,
+  &quot;...................................................&quot;,
+  &quot;...................................................&quot;,
+  &quot;...................................................&quot;,
+  &quot;........@RRRRRRRR..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX..................................&quot;,
+  &quot;........CXXXXXXXX:::::::::::::::::::::::::4........&quot;,
+  &quot;........CXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXC........&quot;,
+  &quot;........CXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXC........&quot;,
+  &quot;........CXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXC........&quot;,
+  &quot;........CXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXC........&quot;,
+  &quot;........CXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXC........&quot;,
+  &quot;........@RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR@........&quot;,
+  &quot;...................................................&quot;,
+  &quot;...................................................&quot;,
+  &quot;...................................................&quot;,
+  &quot;...................................................&quot;,
+  &quot;...................................................&quot;,
+  &quot;...................................................&quot; }</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>4</pre></td></tr><tr><td><pre>4</pre></td></tr><tr><td><pre>{&quot;...AAA...&quot;,
+ &quot;...AAA...&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: { &quot;.;;.&quot;,  &quot;.;;.&quot;,  &quot;.;;.&quot;,  &quot;.;;.&quot; }</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>4</pre></td></tr><tr><td><pre>4</pre></td></tr><tr><td><pre>{&quot;......&quot;,
+ &quot;.X....&quot;,
+ &quot;.X....&quot;,
+ &quot;.X....&quot;,
+ &quot;.X....&quot;,
+ &quot;.XXXX.&quot;,
+ &quot;......&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: { &quot;44..&quot;,  &quot;&lt;&lt;..&quot;,  &quot;&lt;@40&quot;,  &quot;4@@4&quot; }</pre></td></tr><tr><td></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

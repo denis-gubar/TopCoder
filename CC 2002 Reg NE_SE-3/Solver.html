@@ -1,0 +1,102 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><pre>PROBLEM STATEMENT
+After writing a careful and correct data checking method, a problem writer then
+has to code a solution.  This is what you should now do.
+
+Implement a class Solver with a method largest() that will take a String[]
+lovers as an argument.  Each element of lovers will be formatted as follows:
+&quot;NAME1 LOVES NAME2&quot; (quotes added for clarity).
+With the capital word LOVES in between names, and the names containing only
+capital letters [A-Z] and/or hyphens '-'.
+
+For each NAME2 in lovers there will be a corresponding NAME1.  One person may
+love multiple people (repeated NAME1), multiple people may love one person
+(repeated NAME2), but no person may love themselves (NAME1 equals NAME2).
+
+Return the number of people involved in the largest love triangle.  That is,
+the largest chain of people such that:
+A LOVES B
+B LOVES C
+C LOVES D
+D LOVES E
+E LOVES A
+until the last person loved (NAME2--in this example A) appears somewhere else
+in the chain as NAME1, at which point the triangle starts and ends with that
+name.
+The triangle above consists of 5 people (A B C D and E).
+
+A love triangle can consist of 2 or more people.
+
+DEFINITION
+Class name: Solver
+Method name: largest
+Parameters: String[]
+Returns: int
+The method signature is:
+int largest(String[] lovers)
+Be sure your method is public.
+
+TopCoder will ensure the following (there is no difference between these and
+the 500 point problem psuedo-restrictions):
+*lovers will contain between 2 and 20 elements, inclusive.
+*Each element of lovers will contain less than or equal to 40 characters and
+will be formatted as
+ &quot;NAME1 LOVES NAME2&quot; (quotes added for clarity again)
+ with the capital word LOVES and only one space between words.
+*NAME1 and NAME2 will be names of non-zero length.
+*NAME1 and NAME2 will not be identical (everyone loves themselves anyway).
+*NAME1 and NAME2 will contain only capital letters [A-Z] and/or hyphens '-'.
+*For each NAME2 there will be a corresponding NAME1 in lovers.  That is,
+everyone loves someone else in the problem.
+*One person may love multiple people (repeated NAME1 in different elements) and
+one person may be loved by multiple people (repeated NAME2 in different
+elements).
+
+*It is possible for two elements to be identical.
+ (ex {&quot;A LOVES B&quot;,&quot;A LOVES B&quot;,&quot;B LOVES A&quot;} is valid).
+
+EXAMPLES
+{&quot;D LOVES M&quot;,
+ &quot;M LOVES D&quot;,
+ &quot;T LOVES G&quot;,
+ &quot;G LOVES D&quot;}
+The largest love triangle (between D and M) is 2.
+
+{&quot;ME LOVES YOU&quot;,
+ &quot;ME LOVES YOU&quot;,
+ &quot;YOU LOVES ME&quot;}
+The largest triangle is between YOU and ME, so the method returns 2.
+
+{&quot;A LOVES B&quot;,
+ &quot;B LOVES C&quot;,
+ &quot;C LOVES A&quot;,
+ &quot;B LOVES D&quot;,
+ &quot;D LOVES E&quot;,
+ &quot;E LOVES C&quot;,
+ &quot;E LOVES F&quot;,
+ &quot;F LOVES G&quot;,
+ &quot;G LOVES F&quot;}
+This looks as follows:
+
+/---&lt;---\
+|       |
+A-&gt;-B-&gt;-C
+    |   ^
+    v   |
+    D-&gt;-E
+        |
+        v
+    G&lt;-&gt;F
+
+A-&gt;B-&gt;D-&gt;E-&gt;C-&gt;A is the largest triangle, which is of size 5.
+
+{&quot;A LOVES B&quot;,
+ &quot;B LOVES C&quot;,
+ &quot;C LOVES B&quot;,
+ &quot;B LOVES A&quot;}
+
+Either A-&gt;B-&gt;A or B-&gt;C-&gt;B are legal, and both of size 2.  We see that
+A-&gt;B-&gt;C-&gt;B-&gt;A is not legal since, by the above definition of triangle, once
+person B appears as both NAME2 and NAME1 in the triangle, the triangle can go
+no further and must start and end with person B (giving B-&gt;C-&gt;B).  The method
+should return 2.
+</pre></td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>Solver</td></tr><tr><td>Method:</td><td>largest</td></tr><tr><td>Parameters:</td><td>vector &lt;string&gt;</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int largest(vector &lt;string&gt; param0)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td>&#160;&#160;&#160;&#160;</td></tr><tr><td></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

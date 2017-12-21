@@ -1,0 +1,23 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>So much to do and so little time to do it in!  You have a long list of
+computer programs that must be run and you want them to finish running
+as soon as possible.  Each program in the list requires a certain
+amount of your time to set up, and during this time you must devote
+your full attention to the setup of that program.  After you have
+finished with the setup of a program, it will immediately start
+execution and will run for a certain amount of time on the computer.
+You have enough processing power that all of the programs may be run
+simultaneously without any of them slowing down.  You are to find a
+schedule such that the time at which all of the programs are finished
+is as early as possible and you should return that time (assuming you
+start at time 0).<br></br><br></br>
+
+You will be given vector &lt;int&gt;'s <b>A</b> and <b>B</b>,
+corresponding elements of which represent a single program.  Each
+element of <b>A</b> represents the setup time of a program and the
+corresponding element of <b>B</b> represents the running time of that
+program.
+</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>ProgramSchedule</td></tr><tr><td>Method:</td><td>schedule</td></tr><tr><td>Parameters:</td><td>vector &lt;int&gt;, vector &lt;int&gt;</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int schedule(vector &lt;int&gt; A, vector &lt;int&gt; B)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td>&#160;&#160;&#160;&#160;</td></tr><tr><td></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>A</b> and <b>B</b> will contain the same number of elements.</td></tr><tr><td align="center" valign="top">-</td><td><b>A</b> and <b>B</b> will contain between 1 and 50 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>A</b> and <b>B</b> will be between 1 and 1000, inclusive.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1,2,3,4}
+</pre></td></tr><tr><td><pre>{2,2,4,2}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 12</pre></td></tr><tr><td><table><tr><td colspan="2">In this case, you can simply execute the programs in the same order
+they are given (though there are other ways which give the same final time).
+The 4 programs will finish after 3, 5, 10, and 12, respectively.
+</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{3,1,2}</pre></td></tr><tr><td><pre>{4,3,9}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 11</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1000}</pre></td></tr><tr><td><pre>{1000}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2000</pre></td></tr><tr><td></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

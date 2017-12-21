@@ -1,0 +1,49 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>
+An &quot;n-dimensional grid of size k&quot; contains k^n cells. Each cell can be
+represented as an n-tuple of values from the set {0,1,...,k-1}.  For example a
+2-dimensional grid of size 3 is just a 3 x 3 square, with cells (0,0) (0,1)
+(0,2) (1,0) (1,1) (1,2) (2,0) (2,1) and (2,2). A 3-dimensional grid of size 5
+is a cube containing 125 cells. Cell (0,2,2) is the cell in row 0, column 2,
+layer 2.
+<p>
+Higher dimensions get a little harder to describe geometrically, but not
+algebraically! Every cell in an n-dimensional grid can be uniquely represented
+by an n-tuple specifying the &quot;row&quot; &quot;column&quot; &quot;layer&quot; &quot;plane&quot; &quot;hyper-row&quot; etc.
+(English fails us at about the same point as geometry fails us).  We can
+define a straight line in an n-dimensional grid algebraically.  It is a set of
+distinct cells that can be placed in a sequence such that the difference
+between each pair of adjacent cells is the same throughout the sequence. Of
+course, the difference between two n-tuples is an n-tuple. A maximal line in an
+n-dimensional grid of size k is a line containing k cells. 
+</p><p>
+In a 3-dimensional grid of size 4, one example of a maximal straight line is
+(3,0,1),(2,1,1),(1,2,1),(0,3,1) which is a straight line of length 4. The
+difference between each pair of adjacent cells in the sequence is (-1,1,0). 
+</p><p>
+You want to create a maximal line in your n-dimensional grid by adding to a
+collection of cells that have already been chosen. Create a class TupleLine
+that contains the method quickLine that takes an int <b>size</b> and a string[]
+<b>chosen</b> as inputs and returns the smallest number
+of additional cells that you could choose to form a maximal line in the grid.
+</p><p>
+Each string in <b>chosen</b> is a sequence of digits indicating a particular cell. For
+example, &quot;410&quot; would indicate the cell at row 4, column 1, layer 0 in a
+3-dimensional grid whose size is at least 5 (since it has a row 4).  The
+dimension of the grid is always the same as the length of each string in <b>chosen</b>.
+</p>
+</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>TupleLine</td></tr><tr><td>Method:</td><td>quickLine</td></tr><tr><td>Parameters:</td><td>int, string[]</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int quickLine(int size, string[] chosen)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td>&#160;&#160;&#160;&#160;</td></tr><tr><td></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>size</b> is between 3 and 9 inclusive</td></tr><tr><td align="center" valign="top">-</td><td><b>chosen</b> contains between 1 and 50 elements inclusive</td></tr><tr><td align="center" valign="top">-</td><td>each character in each element of <b>chosen</b> is a digit whose value is less than <b>size</b></td></tr><tr><td align="center" valign="top">-</td><td>each element in <b>chosen</b> contains the same number of characters, n. n is the dimension of the grid and is between 2 and 9 inclusive</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>4</pre></td></tr><tr><td><pre>{&quot;00&quot;,&quot;02&quot;,&quot;21&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2</pre></td></tr><tr><td><table><tr><td colspan="2">
+<pre>
+    X - X -         X X X X
+    - - - -         - - - -
+    - X - -         - X - -
+    - - - -         - - - -
+</pre>
+The left-hand picture shows the original situation.  The right-hand picture shows the only way of completing a maximal line by adding two X's.
+</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>4</pre></td></tr><tr><td><pre>{&quot;00&quot;,&quot;32&quot;,&quot;21&quot;,&quot;32&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 3</pre></td></tr><tr><td><table><tr><td colspan="2"><pre>
+    X - - -
+    - - - -
+    - X - -
+    - - X -
+</pre>
+There are lots of ways to form a maximal line with 3 more cells. Note that the cell &quot;32&quot; appears twice in <b>chosen</b> but, of course, this does not help us to form a maximal line.
+</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>3</pre></td></tr><tr><td><pre>{&quot;0022&quot;,&quot;0202&quot;,&quot;0112&quot;,&quot;0000&quot;,&quot;0112&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0</pre></td></tr><tr><td><table><tr><td colspan="2">These first three cells already form a maximal line in this 4-dimensional grid.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>9</pre></td></tr><tr><td><pre>{&quot;2355846&quot;,&quot;6355842&quot;,&quot;3355848&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 7</pre></td></tr><tr><td></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

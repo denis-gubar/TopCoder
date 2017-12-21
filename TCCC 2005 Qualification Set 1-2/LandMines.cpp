@@ -1,0 +1,108 @@
+#include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <functional>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <numeric>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <queue>
+#include <vector>
+using namespace std;
+// BEGIN CUT HERE
+#include <Windows.h>
+#pragma comment( lib, "Winmm" )
+// END CUT HERE
+typedef long long lint;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef vector<string> vs;
+int dx[] = {0, 1, 0, -1};
+int dy[] = {1, 0, -1, 0};
+struct LandMines
+{
+	int numClear( vs layout )
+	{
+		int result = 1, m = layout.size(), n = layout[0].size();
+		vvi A(m, vi(n, 0));
+		A[0][0] = 1;
+		queue<int> q; q.push( 0 ); q.push( 0 );
+		while( !q.empty() )
+		{
+			int x = q.front(); q.pop();
+			int y = q.front(); q.pop();
+			for( int k = 0; k < 4; ++k )
+			{
+				bool flag = true;
+				for( int i = 1; x + i * dx[k] >= 0 && x + i * dx[k] < m && y + i * dy[k] >= 0 && y + i * dy[k] < n; ++i )
+					flag &= layout[x + i * dx[k]][y + i * dy[k]] == '-';
+				if ( flag )
+					for( int i = 1; x + i * dx[k] >= 0 && x + i * dx[k] < m && y + i * dy[k] >= 0 && y + i * dy[k] < n; ++i )
+						if( !A[x + i * dx[k]][y + i * dy[k]] )
+						{
+							A[x + i * dx[k]][y + i * dy[k]] = 1; q.push( x + i * dx[k] ); q.push( y + i * dy[k] );
+							++result;
+						}
+			}
+		}
+		return result;
+	}
+// BEGIN CUT HERE
+	private:
+	template <typename T> string print_array( const vector<T>& v ) { ostringstream os; os << "{ "; for( typename vector<T>::const_iterator it = v.begin(); it != v.end(); ++it ) os << '\"' << *it << "\","; os << " }"; return os.str(); }
+	template<typename T> void verify_case( int Case, const vector<T>& expected, const vector<T>& received ) { cerr << "Test Case #" << Case << "..."; if ( expected == received ) cerr << "PASSED. "; else { cerr << "FAILED." << endl; cerr << "\tExpected: " << print_array( expected ) << endl; cerr << "\tReceived: " << print_array( received ) << endl; } }
+	void verify_case( int Case, const lint& expected, const lint& received ) { cerr << "Test Case #" << Case << "..."; if ( expected == received ) cerr << "PASSED. "; else { cerr << "FAILED." << endl; cerr << "\tExpected: \"" << expected << '\"' << endl; cerr << "\tReceived: \"" << received << '\"' << endl; } }
+	void verify_case( int Case, const double& expected, const double& received ) { cerr << "Test Case #" << Case << "..."; if ( expected == received ) cerr << "PASSED. "; else { cerr << "FAILED." << endl; cerr << "\tExpected: \"" << expected << '\"' << endl; cerr << "\tReceived: \"" << received << '\"' << endl; } }
+	void verify_case( int Case, const int& expected, const int& received ) { cerr << "Test Case #" << Case << "..."; if ( expected == received ) cerr << "PASSED. "; else { cerr << "FAILED." << endl; cerr << "\tExpected: \"" << expected << '\"' << endl; cerr << "\tReceived: \"" << received << '\"' << endl; } }
+	void verify_case( int Case, const string& expected, const string& received ) { cerr << "Test Case #" << Case << "..."; if ( expected == received ) cerr << "PASSED. "; else { cerr << "FAILED." << endl; cerr << "\tExpected: \"" << expected << '\"' << endl; cerr << "\tReceived: \"" << received << '\"' << endl; } }
+	public:
+	void run_test( int Case = -1 ) { vector<vs> A0; vector<int> A1;
+	{ /*Test 0*/string _Arg0[] = 
+	{"-M-",
+ "---",
+ "M--"}
+	; vs Arg0(_Arg0, _Arg0 + (sizeof(_Arg0) / sizeof(_Arg0[0]))); A0.push_back( Arg0 ); int Arg1 = 
+	1
+	; A1.push_back( Arg1 );  }
+	{ /*Test 1*/string _Arg0[] = 
+	{"-M-",
+ "-M-",
+ "--M"}
+	; vs Arg0(_Arg0, _Arg0 + (sizeof(_Arg0) / sizeof(_Arg0[0]))); A0.push_back( Arg0 ); int Arg1 = 
+	3
+	; A1.push_back( Arg1 );  }
+	{ /*Test 2*/string _Arg0[] = 
+	 {"--M-",
+  "-MM-",
+  "----",
+  "----"}
+	; vs Arg0(_Arg0, _Arg0 + (sizeof(_Arg0) / sizeof(_Arg0[0]))); A0.push_back( Arg0 ); int Arg1 = 
+	12
+	; A1.push_back( Arg1 );  }
+	{ /*Test 3*/string _Arg0[] = 
+	{"-----",
+ "--M-M",
+ "-----",
+ "-M---",
+ "---M-"}
+	; vs Arg0(_Arg0, _Arg0 + (sizeof(_Arg0) / sizeof(_Arg0[0]))); A0.push_back( Arg0 ); int Arg1 = 
+	21
+	; A1.push_back( Arg1 );  }
+	for( int i = 0; i < A0.size(); i++ ) if ( Case == -1 || i == Case ) { DWORD start, finish; start = timeGetTime(); verify_case( i, A1[i], numClear( A0[i]) ); finish = timeGetTime(); cout << "Elapsed " << finish - start << " msec" << endl; } }
+// END CUT HERE
+};
+// BEGIN CUT HERE
+int main()
+{
+	DWORD start, finish;
+	start = timeGetTime();
+	LandMines ___test; 
+	___test.run_test(); 
+	finish = timeGetTime();
+	cout << endl << "Elapsed " << finish - start << " msec" << endl;
+} 
+// END CUT HERE

@@ -1,0 +1,98 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>Various groups are occupying territory in a local region.  We are going to record which group owns which land on a map.  This map will be represented by a vector &lt;string&gt; with <b>rows</b> elements, each element containing <b>cols</b> characters.  As time passes, the map will change based on troop movements.  At the very beginning, our map will only contain '.' characters denoting lack of ownership.  As time passes and land is acquired, the map will contain numerals ('0'-'9') denoting which group owns a particular piece of territory.  At each time <i>t</i>, starting with time 0, the following actions occur in order:
+<ul>
+	<li> 1) Each character c of the map that is orthogonally adjacent to a numeral at the beginning of time <i>t</i> should become that numeral, unless there is a <i>conflict</i>. A conflict occurs when c is a numeral different from one of its orthogonal neighbors at the beginning of time <i>t</i>, or when at least 2 distinct numerals are orthogonally adjacent to c at the beginning of time <i>t</i>.  In such a case, a battle occurs to determine the owner of the land.  For each adjacent numeral i, compute 
+<pre> <i>battleScore(i)</i> = <i>t</i>-<i>entranceTime(i)</i>,</pre>
+where <i>entranceTime(i)</i> is the <i>entranceTime</i> of numeral i (see next item).
+If c was not '.', also compute the <i>battleScore</i> for the numeral at c.  The lowest <i>battleScore</i> determines the winner.  If there is a tie for lowest, choose the lower numeral.  The winning numeral is placed at c on the map.</li>
+	<li> 2) <b>times</b> will denote when the numerals enter the map.  Each element of <b>times</b> has the format (quotes for clarity) &quot;row col <i>entranceTime</i>&quot;.  If the <i>entranceTime</i> component of element k (0-based) of <b>times</b> is equal to <i>t</i>, place the numeral k in element row, character col of the map.  This occurs regardless of the contents of the map at the given position.</li>   
+</ul>
+Note that the <i>entranceTime</i> of a numeral never changes (regardless of position or time).  Return the map after time <b>endTime</b> is complete.</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>ConquerMap</td></tr><tr><td>Method:</td><td>getMap</td></tr><tr><td>Parameters:</td><td>int, int, vector &lt;string&gt;, int</td></tr><tr><td>Returns:</td><td>vector &lt;string&gt;</td></tr><tr><td>Method signature:</td><td>vector &lt;string&gt; getMap(int rows, int cols, vector &lt;string&gt; times, int endTime)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td>&#160;&#160;&#160;&#160;</td></tr><tr><td></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>rows</b> will be between 2 and 50 inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>cols</b> will be between 2 and 50 inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>endTime</b> will be between 0 and 100 inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>times</b> will contain between 1 and 10 elements inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>times</b> will have the format (quotes for clarity) &quot;row col <i>entranceTime</i>&quot; where <br></br> row is between 0 and <b>rows</b>-1 inclusive with no extra leading zeros, <br></br> col is between 0 and <b>cols</b>-1 inclusive with no extra leading zeros, <br></br> and <i>entranceTime</i> is between 0 and 100 inclusive with no extra leading zeros.</td></tr><tr><td align="center" valign="top">-</td><td><b>times</b> will contain no duplicate entries.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>10</pre></td></tr><tr><td><pre>10</pre></td></tr><tr><td><pre>{&quot;0 0 0&quot;,&quot;2 2 0&quot;}</pre></td></tr><tr><td><pre>1</pre></td></tr></table></td></tr><tr><td><pre>Returns: 
+{ &quot;00........&quot;,
+  &quot;0.1.......&quot;,
+  &quot;.111......&quot;,
+  &quot;..1.......&quot;,
+  &quot;..........&quot;,
+  &quot;..........&quot;,
+  &quot;..........&quot;,
+  &quot;..........&quot;,
+  &quot;..........&quot;,
+  &quot;..........&quot; }</pre></td></tr><tr><td><table><tr><td colspan="2">After entering the map at time 0, both groups have expanded without opposition...</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>10</pre></td></tr><tr><td><pre>10</pre></td></tr><tr><td><pre>{&quot;0 0 0&quot;,&quot;2 2 0&quot;}</pre></td></tr><tr><td><pre>2</pre></td></tr></table></td></tr><tr><td><pre>Returns: 
+{ &quot;000.......&quot;,
+  &quot;0011......&quot;,
+  &quot;01111.....&quot;,
+  &quot;.111......&quot;,
+  &quot;..1.......&quot;,
+  &quot;..........&quot;,
+  &quot;..........&quot;,
+  &quot;..........&quot;,
+  &quot;..........&quot;,
+  &quot;..........&quot; }</pre></td></tr><tr><td><table><tr><td colspan="2">The first battle has occurred at row 1 col 1, and 0 has won.  The exact computation made was:<pre>
+	battleScore(0) = 2 - 0 = 2
+	battleScore(1) = 2 - 0 = 2
+</pre>
+battleScore(0) equals battleScore(1) but 0&lt;1 so 0 takes the area.
+</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>21</pre></td></tr><tr><td><pre>21</pre></td></tr><tr><td><pre>{&quot;5 5 0&quot;,&quot;5 5 3&quot;,&quot;17 17 4&quot;}</pre></td></tr><tr><td><pre>10</pre></td></tr></table></td></tr><tr><td><pre>Returns: 
+{ &quot;00011111000..........&quot;,
+  &quot;001111111000.........&quot;,
+  &quot;0111111111000........&quot;,
+  &quot;11111111111000.......&quot;,
+  &quot;111111111111000......&quot;,
+  &quot;1111111111111000.....&quot;,
+  &quot;111111111111000......&quot;,
+  &quot;11111111111000.......&quot;,
+  &quot;0111111111000........&quot;,
+  &quot;001111111000.........&quot;,
+  &quot;00011111000..........&quot;,
+  &quot;.000111000.......2...&quot;,
+  &quot;..0001000.......222..&quot;,
+  &quot;...00000.......22222.&quot;,
+  &quot;....000.......2222222&quot;,
+  &quot;.....0.......22222222&quot;,
+  &quot;............222222222&quot;,
+  &quot;...........2222222222&quot;,
+  &quot;............222222222&quot;,
+  &quot;.............22222222&quot;,
+  &quot;..............2222222&quot; }</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>21</pre></td></tr><tr><td><pre>21</pre></td></tr><tr><td><pre>{&quot;0 20 0&quot;,&quot;20 20 0&quot;,&quot;0 0 0&quot;,&quot;20 0 0&quot;,&quot;5 5 60&quot;}</pre></td></tr><tr><td><pre>12</pre></td></tr></table></td></tr><tr><td><pre>Returns: 
+{ &quot;222222220000000000000&quot;,
+  &quot;222222222000000000000&quot;,
+  &quot;222222222200000000000&quot;,
+  &quot;2222222222.0000000000&quot;,
+  &quot;222222222...000000000&quot;,
+  &quot;22222222.....00000000&quot;,
+  &quot;2222222.......0000000&quot;,
+  &quot;222222.........000000&quot;,
+  &quot;22222...........00000&quot;,
+  &quot;2222.............0000&quot;,
+  &quot;222...............000&quot;,
+  &quot;2233.............1100&quot;,
+  &quot;23333...........11110&quot;,
+  &quot;333333.........111111&quot;,
+  &quot;3333333.......1111111&quot;,
+  &quot;33333333.....11111111&quot;,
+  &quot;333333333...111111111&quot;,
+  &quot;3333333333.1111111111&quot;,
+  &quot;333333333311111111111&quot;,
+  &quot;333333333111111111111&quot;,
+  &quot;333333331111111111111&quot; }</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>2</pre></td></tr><tr><td><pre>2</pre></td></tr><tr><td><pre>{&quot;0 0 0&quot;,&quot;0 0 1&quot;,&quot;0 0 2&quot;,&quot;0 0 3&quot;}</pre></td></tr><tr><td><pre>100</pre></td></tr></table></td></tr><tr><td><pre>Returns: { &quot;33&quot;,  &quot;33&quot; }</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>21</pre></td></tr><tr><td><pre>21</pre></td></tr><tr><td><pre>{&quot;0 0 1&quot;,&quot;10 0 2&quot;,&quot;20 0 3&quot;,&quot;0 10 2&quot;,&quot;10 10 2&quot;,&quot;0 20 3&quot;,
+ &quot;10 20 4&quot;,&quot;20 10 4&quot;,&quot;20 20 5&quot;}</pre></td></tr><tr><td><pre>7</pre></td></tr></table></td></tr><tr><td><pre>Returns: 
+{ &quot;000003333333333355555&quot;,
+  &quot;000000333333333..5555&quot;,
+  &quot;00000..3333333....555&quot;,
+  &quot;0000....33333......55&quot;,
+  &quot;000......333........5&quot;,
+  &quot;10........3..........&quot;,
+  &quot;11.......444.........&quot;,
+  &quot;111.....44444.......6&quot;,
+  &quot;1111...4444444.....66&quot;,
+  &quot;11111.444444444...666&quot;,
+  &quot;1111114444444444.6666&quot;,
+  &quot;11111.444444444...666&quot;,
+  &quot;1111...4444444.....66&quot;,
+  &quot;111.....44444.......6&quot;,
+  &quot;11.......444.........&quot;,
+  &quot;1.........4..........&quot;,
+  &quot;2....................&quot;,
+  &quot;22........7..........&quot;,
+  &quot;222......777........8&quot;,
+  &quot;2222....77777......88&quot;,
+  &quot;22222..7777777....888&quot; }</pre></td></tr><tr><td></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>
